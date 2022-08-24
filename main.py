@@ -1,7 +1,6 @@
 # Subnet/Supernet Address Calculator
 # by Mike Rotella, 2022
 
-from error import error
 from binary import *
 
 def subnet_calc(ip, mask):
@@ -77,11 +76,7 @@ def calculate_mask_length(mask):
     :param mask: Mask as binary list
     :return: Slash notation bitmask length
     """
-    try:
-        cidr = mask.count("1")
-    except ValueError:
-        error(3)
-    # Return bit length notation if valid
+    cidr = mask.count("1")
     return cidr
 
 
