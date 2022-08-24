@@ -1,6 +1,6 @@
 # Subnet Calculator
 
-by Mike Rotella
+by Mike Rotella, 2022
 ___
 
 My goal with this was to create a Python script that uses no libraries to calculate IPv4
