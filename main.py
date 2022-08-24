@@ -20,6 +20,10 @@ def subnet_calc(ip, mask):
     binary_mask = binary_mask.convert_validated_mask_to_binary_list()
     # Calculate the length of the bitmask and store in a string to return
     cidr = calculate_mask_length(binary_mask)
+    # Set supernet flag if applicable
+    supernet = False
+    if int(cidr) < 8:
+        supernet = True
     # Calculate the network address and store it in a list to convert later
     subnet = []
     for (ipbits, maskbits) in zip(ip, mask):
@@ -38,7 +42,7 @@ def subnet_calc(ip, mask):
     range = calculate_host_range(binary_subnet,broadcast_list[0], cidr)
     first_host_ip = range[0]
     last_host_ip = range[1]
-    return [subnet_string, cidr, broadcast, first_host_ip, last_host_ip]
+    return [subnet_string, cidr, broadcast, first_host_ip, last_host_ip, supernet]
 
 
 def calculate_host_range(subnet, broadcast, cidr):
@@ -126,18 +130,20 @@ def check_mask_format(mask):
 
 
 def main():
-    ip = "2.1.2.3"
-    mask = "8"
-    # ip = input("Enter the IP address: ")
-    # mask = input("Enter the mask: ")
+    ip = input("Enter the IP address: ")
+    mask = input("Enter the mask: ")
     # Check if mask is slash notation or dotted decimal
     mask = check_mask_format(mask)
     # Calculate the values info
     subnet_calc(ip, str(mask))
     values = subnet_calc(ip, mask)
-    print(f"The network address is: {values[0]}/{values[1]}.")
-    print(f"The broadcast address is {values[2]}.")
-    print(f"The host range is {values[3]} - {values[4]}")
+    supernet = values[5]
+    if supernet is False:
+        print(f"The network address is: {values[0]}/{values[1]}.")
+        print(f"The broadcast address is {values[2]}.")
+        print(f"The host range is {values[3]} - {values[4]}")
+    else:
+        print(f"The CIDR range is {values[3]} - {values[4]}")
 
 
 if __name__ == "__main__":
