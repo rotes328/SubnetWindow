@@ -63,7 +63,6 @@ class BinaryList:
     def pad(self, length):
         """
         Prepend binary list with leading 0s to fill a byte, nibble, etc.
-        :param binary: Binary list
         :param length: Length to make the return value
         :return: Padded binary list with 0s before the most significant bit
         """
@@ -75,7 +74,6 @@ class BinaryList:
         """
         Pad 0s to the end of a binary list up to the length to convert slash
         notation to dotted decimal
-        :param binary: Binary list
         :param length: Desired length (32 for IPv4)
         :return: Padded binary list with 0s after the least significant bit
         """
@@ -85,7 +83,6 @@ class BinaryList:
 
     def convert_list_to_dotted_binary(self):
         """
-        :param binary_list:  Binary list
         :return: List of 4 lists, one per byte
         """
         dotted_binary = [self.binary_list[i * 8:(i + 1) * 8]
@@ -94,7 +91,6 @@ class BinaryList:
 
     def convert_to_long_binary(self):
         """
-        :param binary_list: Binary list
         :return: Binary as string (e.g. "0b101011...")
         """
         binary = "".join(self.binary_list)
@@ -142,8 +138,7 @@ class DottedDecimalList:
 
     def convert_validated_mask_to_binary_list(self):
         """
-        :param mask: Mask as list (e.g. ['255', '255', '255', '224'])
-        :return: Validated mask as binary list
+        :return: Valid mask as binary list, if not valid an error will return
         """
         binary = []
         byte_list = ByteList(binary)
@@ -176,7 +171,6 @@ class DottedDecimalList:
 
     def convert_to_dotted_decimal(self):
         """
-        :param list: Dotted decimal as list (e.g. ['172', '16', '200', '192'])
         :return: Dotted decimal as string (e.g. "172.16.200.192")
         """
         DottedDecimalString = ".".join(self.dotted_decimal_list)
@@ -194,12 +188,15 @@ class ByteList:
         return str(self.byte_list)
 
     def push(self, binary_string):
+        """
+        :param binary_string: Binary string
+        :return: Push to the end of the list
+        """
         self.byte_list.append(binary_string)
         pass
 
     def convert_to_long_binary(self):
         """
-        :param binary_list: Byte list
         :return: Binary as string (e.g. "0b101011...")
         """
         long_binary = "".join(self.byte_list)
@@ -208,6 +205,9 @@ class ByteList:
         return long_binary
 
     def remove_0b(self):
+        """
+        :return: Byte list without "0b"
+        """
         for i in range(4):
             octet = self.byte_list[i]
             self.byte_list[i] = octet.replace("0b", "")
@@ -227,7 +227,6 @@ class DottedBinaryList:
 
     def convert_dotted_binary_to_dotted_decimal(self):
         """
-        :param dotted_binary: Dotted binary list
         :return: Dotted decimal string (e.g. "10.20.14.200")
         """
         string_bytes = []
@@ -258,8 +257,7 @@ class BitmaskString:
 
     def convert_bitmask_to_dotted_decimal(self):
         """
-        :param mask: Mask length (e.g. 24)
-        :return: Mask as dotted decimal
+        :return: Mask as dotted decimal in string format
         """
         binary_mask = []
         try:
@@ -285,13 +283,15 @@ class BinaryString:
         return str(self.binary_string)
 
     def remove_0b(self):
+        """
+        :return: Binary string without "0b"
+        """
         self.binary_string = str(self.binary_string).replace("0b","")
         return self.binary_string
 
     def convert_to_binary_list(self):
         """
-        :param string: String
-        :return: List of each element
+        :return: Binary list
         """
         list = []
         list[:0] = self.binary_string
@@ -300,7 +300,6 @@ class BinaryString:
     def pad(self, length):
         """
         Prepend binary string with leading 0s to fill a byte, nibble, etc.
-        :param binary: Binary with no leading 0s
         :param length: Length to make the return value
         :return: Padded binary string with 0s before most significant bit
         """
@@ -310,8 +309,7 @@ class BinaryString:
 
     def convert_to_dotted_binary(self):
         """
-        :param binary: Binary string (e.g. "0b101011...")
-        :return: List of 4 binary lists, one per byte
+        :return: List of 4 binary lists (dotted binary), one per byte
         """
         binary = self.binary_string.replace("0b","")
         list = []
