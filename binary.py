@@ -1,3 +1,5 @@
+# Mike Rotella 2022
+
 from error import error
 
 class DottedDecimalString:
