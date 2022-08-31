@@ -59,7 +59,6 @@ class BinaryList:
     def __str__(self):
         return str(self.binary_list)
 
-
     def pad(self, length):
         """
         Prepend binary list with leading 0s to fill a byte, nibble, etc.
