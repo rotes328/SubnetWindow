@@ -1,3 +1,5 @@
+# Mike Rotella 2022
+
 def error(code):
     # Used to flag errors
     if code == 1:
