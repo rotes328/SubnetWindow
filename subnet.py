@@ -123,23 +123,3 @@ def check_mask_format(mask):
         mask = BitmaskString(mask).convert_bitmask_to_dotted_decimal()
     return mask
 
-
-def main():
-    ip = input("Enter the IP address: ")
-    mask = input("Enter the mask: ")
-    # Check if mask is slash notation or dotted decimal
-    mask = check_mask_format(mask)
-    # Calculate the values info
-    subnet_calc(ip, str(mask))
-    values = subnet_calc(ip, mask)
-    supernet = values[5]
-    if supernet is False:
-        print(f"The network address is: {values[0]}/{values[1]}.")
-        print(f"The broadcast address is {values[2]}.")
-        print(f"The host range is {values[3]} - {values[4]}")
-    else:
-        print(f"The CIDR range is {values[3]} - {values[4]}")
-
-
-if __name__ == "__main__":
-    main()
