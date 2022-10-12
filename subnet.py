@@ -13,20 +13,17 @@ def subnet_calc(ip, mask):
     """
     # Split the IP as a string into a list of strings and do basic error checking
     ip = DottedDecimalString(ip).convert_ip_to_dotted_decimal_list()
-    if ip is True:
-        mistake = True
-        return mistake
+    if isinstance(ip, int):
+        return ip
     # Split the mask as a string into a list of strings and do basic error checking
     mask = DottedDecimalString(mask).convert_mask_to_dotted_decimal_list()
-    if mask is True:
-        mistake = True
-        return mistake
+    if isinstance(mask, int):
+        return mask
     # Convert the mask list into binary and put it in a list
     binary_mask = DottedDecimalList(mask)
     binary_mask = binary_mask.convert_validated_mask_to_binary_list()
-    if binary_mask is True:
-        mistake = True
-        return mistake
+    if isinstance(binary_mask, int):
+        return binary_mask
     # Calculate the length of the bitmask and store in a string to return
     cidr = calculate_mask_length(binary_mask)
     # Set supernet flag if applicable
@@ -37,12 +34,8 @@ def subnet_calc(ip, mask):
     subnet = []
     for (ipbits, maskbits) in zip(ip, mask):
         # Do a logical AND on the integer values of the IP and mask lists
-        # try:
         number = int(ipbits) & int(maskbits)
         subnet.append(str(number))
-        # except:
-            # error_text = error(1)
-            # messagebox.showerror("Python Error", error_text)
     # Convert the network address to binary and store in a list for later calculation
     binary_subnet = DottedDecimalList(subnet).convert_dotted_decimal_list_to_binary_list()
     # Calculate broadcast info from network and mask binary lists
