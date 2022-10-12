@@ -1,5 +1,5 @@
 ### Visual Subnet Calculator
-*© Mike Rotella 2022, GNU
+*© Mike Rotella 2022, GNU GPL_v3*
 
 Calculate network address, broadcast address, and host
 range for a given IP and mask. Mask can be in slash
