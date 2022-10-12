@@ -158,14 +158,11 @@ class DottedDecimalList:
             return 3
         # Convert to binary string
         binary_str = str(byte_list.convert_to_long_binary().remove_0b())
-        print("length:",len(binary_str))
-        print("binarystring:",binary_str)
         # No /0 mask
         if "1" not in binary_str:
             return 4
         # Must be less than 32 bits
         if len(binary_str) > 32:
-            print(len(binary_str),"mike")
             return 5
         # Check is mask is valid (no 1s after a 0)
         for i in range(1, len(binary_str)):
