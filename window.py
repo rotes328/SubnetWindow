@@ -1,3 +1,4 @@
+import tkinter
 from tkinter import *
 from subnet import *
 from functools import partial
@@ -16,9 +17,10 @@ def calculate_subnet():
         # subnet_calc(ip, str(mask))
         values = subnet_calc(ip, mask)
         if values is True:
-            network_output.configure(text="Error")
-            broadcast_output.configure(text="Error")
-            hostrange_output.configure(text="Error")
+            status_bar.configure(text="Error", bg="red", fg="white", font="Helvetica 14 bold")
+            network_output.configure(text="----------")
+            broadcast_output.configure(text="----------")
+            hostrange_output.configure(text="----------")
             # messagebox.showerror("Python Error", "Error!")
         else:
             network_address_out = "{}/{}".format(values[0],values[1])
@@ -27,6 +29,7 @@ def calculate_subnet():
             output1.config(text="")
             output2.config(text="")
             output3.config(text="")
+            status_bar.configure(text="", bg="#F0F0F0")
             if supernet is False:
                 output1.config(text="Network Address")
                 output2.config(text="Broadcast Address")
@@ -58,14 +61,14 @@ def calculate_subnet():
                 # hostrange_output.configure(text=hostrange)
                 # print(f"The CIDR range is {values[3]} - {values[4]}")
     except Exception as e:
-        network_output.configure(text="Error")
-        broadcast_output.configure(text="Error")
-        hostrange_output.configure(text="Error")
+        status_bar.configure(text="Error", bg="red", fg="white", font="Helvetica 14 bold")
+        network_output.configure(text="----------")
+        broadcast_output.configure(text="----------")
+        hostrange_output.configure(text="----------")
 
 
 win = Tk()
 win.title("Subnet Calculator")
-# win.geometry("400x300")
 ip_label = Label(win, text='IP Address')
 mask_label = Label(win, text='Mask')
 output1 = Label(win, text="Network Address")
@@ -76,14 +79,15 @@ mask_label.grid(row=1)
 output1.grid(row=2)
 output2.grid(row=3)
 output3.grid(row=4)
+status_bar = Label(win, text="", relief=SUNKEN, bg="#F0F0F0")
+status_bar.grid(row=6, column=0, columnspan=2, sticky = W+E)
 # Label(win, text="").grid(row=5)
 
 ip_input = Entry(win)
 subnet_input = Entry(win)
-network_output = Label(win, text="", font=("Courier 12 bold"))
-broadcast_output = Label(win, text="", font=("Courier 12 bold"))
-network_output_mask = Label(win, text="", font=("Courier 12 bold"))
-hostrange_output = Label(win, text="", font=("Courier 12 bold"))
+network_output = Label(win, text="----------", font=("Courier 12 bold"))
+broadcast_output = Label(win, text="----------", font=("Courier 12 bold"))
+hostrange_output = Label(win, text="----------", font=("Courier 12 bold"))
 
 ip_input.grid(row=0, column=1)
 subnet_input.grid(row=1, column=1)
@@ -95,4 +99,4 @@ hostrange_output.grid(row=4, column=1)
 Button(win, text='Exit', command=win.quit).grid(row=5, column=0, sticky=W, pady=4)
 Button(win, text='Calculate', command=calculate_subnet).grid(row=5, column=1, sticky=W, pady=4)
 
-mainloop()
+win.mainloop()
