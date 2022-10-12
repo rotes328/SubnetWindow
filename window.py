@@ -1,6 +1,7 @@
 from tkinter import *
 from subnet import *
 
+
 def clear_output():
     output1.config(text="")
     output2.config(text="")
