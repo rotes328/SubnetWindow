@@ -115,9 +115,5 @@ calculate = Button(win, text="Calculate", command=calculate_subnet)
 calculate.grid(row=5, column=1, sticky=W+E, pady=4)
 
 
-def main():
-    win.mainloop()
-
-
 if __name__ == "__main__":
-    main()
+    win.mainloop()
