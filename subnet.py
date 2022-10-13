@@ -129,4 +129,3 @@ def check_mask_format(mask):
         mask = mask.replace("/", "")
         mask = BitmaskString(mask).convert_bitmask_to_dotted_decimal()
     return mask
-
