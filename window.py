@@ -7,10 +7,12 @@ def clear_output():
     output2.config(text="")
     output3.config(text="")
 
+
 def clear_output_params():
     network_output.configure(text="")
     broadcast_output.configure(text="")
     hostrange_output.configure(text="")
+
 
 def output(values):
     supernet = values[5]
@@ -39,6 +41,7 @@ def error_status(text):
     broadcast_output.configure(text="----------")
     hostrange_output.configure(text="----------")
 
+
 def error_message(code):
     if code == 1:
         text = "Invalid IPv4 Address or Mask"
@@ -55,6 +58,7 @@ def error_message(code):
     elif code == 7:
         text = "Multicast IP; not a subnet."
     error_status(text)
+
 
 def calculate_subnet():
     try:
