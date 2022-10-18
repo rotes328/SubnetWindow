@@ -7,7 +7,8 @@ notation or dotted decimal. Provides error checking and
 error feedback.
 
 **Dependencies:** *python3.10* *tkinter*<br>
-<code>pip install tkinter</code>
+<code>pip install tkinter</code><br>
+<span style="color:tomato">Note this requires Python 3.10</span>
 
 **Screenshots**
 
