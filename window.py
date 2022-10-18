@@ -42,21 +42,22 @@ def error_status(text):
     hostrange_output.configure(text="----------")
 
 
-def error_message(code):
-    if code == 1:
-        text = "Invalid IPv4 Address or Mask"
-    if code == 2:
-        text = "Invalid IPv4 Address"
-    elif code == 3:
-        text = "Invalid Mask"
-    elif code == 4:
-        text = "Mask cannot be /0."
-    elif code == 5:
-        text = "Mask cannot be longer than 32 bits."
-    elif code == 6:
-        text = "IP cannot start with 0"
-    elif code == 7:
-        text = "Multicast IP; not a subnet."
+def errno(code):
+    match code:
+        case 1:
+            text = "Invalid IPv4 Address or Mask"
+        case 2:
+            text = "Invalid IPv4 Address"
+        case 3:
+            text = "Invalid Mask"
+        case 4:
+            text = "Mask cannot be /0."
+        case 5:
+            text = "Mask cannot be longer than 32 bits."
+        case 6:
+            text = "IP cannot start with 0"
+        case 7:
+            text = "Multicast IP; not a subnet."
     error_status(text)
 
 
@@ -68,13 +69,13 @@ def calculate_subnet():
         # Calculate the values info
         values = subnet_calc(ip, mask)
         if isinstance(values,int):
-            error_message(values)
+            errno(values)
         else:
             clear_output()
             output(values)
             status_bar.configure(text="© Mike Rotella 2022", fg="black", bg="#F0F0F0", font="Helvetica 14")
     except Exception as e:
-        error_message(1)
+        errno(1)
 
 
 # Create Window
