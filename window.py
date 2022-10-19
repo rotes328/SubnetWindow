@@ -62,6 +62,7 @@ def output(values):
 
 
 def error_status(text):
+    paint_normal_window()
     status_bar.configure(text=text, bg="red", fg="white", font="Helvetica 14 bold")
     network_output.configure(text="----------")
     broadcast_output.configure(text="----------")
@@ -84,7 +85,6 @@ def errno(code):
             text = "IP cannot start with 0"
         case 7:
             text = "Multicast IP; not a subnet."
-    paint_normal_window()
     error_status(text)
 
 
