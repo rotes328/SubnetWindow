@@ -41,7 +41,10 @@ class DottedDecimalString:
         """
         :return: Dotted decimal mask as list (e.g. ["255", "255", "0", "0"]
         """
-        octets = self.dotted_decimal_string.split(".")
+        try:
+            octets = self.dotted_decimal_string.split(".")
+        except AttributeError:
+            return 3
         # Error without 4 elements
         if len(octets) > 4:
             if octets[4] == "":
