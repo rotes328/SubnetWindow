@@ -2,6 +2,16 @@ from tkinter import *
 from subnet import *
 
 
+def check_input(input1, input2):
+    # If input is too long, return error code
+    if len(input1) > 15:
+        return 2
+    elif len(input2) > 15:
+        return 3
+    else:
+        return None
+
+
 def clear_output():
     output1.config(text="")
     output2.config(text="")
@@ -14,14 +24,30 @@ def clear_output_params():
     hostrange_output.configure(text="")
 
 
+def paint_normal_status():
+    status_bar.configure(text="© Mike Rotella 2022", fg="black", bg="#F0F0F0", font="Helvetica 14")
+
+
+def paint_normal_window():
+    output1.config(text="Network Address")
+    output2.config(text="Broadcast Address")
+    output3.config(text="Host Range")
+
+
 def output(values):
     supernet = values[5]
+    if supernet is None:
+        output1.config(text="Bitmask")
+        clear_output_params()
+        network_output.configure(text="")
+        broadcast_output.configure(text="")
+        hostrange_output.configure(text="")
+        network_output.configure(text=values[0])
+        return
     network_address_out = "{}/{}".format(values[0], values[1])
     hostrange = "{}  -  {}".format(values[3], values[4])
     if supernet is False:
-        output1.config(text="Network Address")
-        output2.config(text="Broadcast Address")
-        output3.config(text="Host Range")
+        paint_normal_window()
         clear_output_params()
         network_output.configure(text=network_address_out)
         broadcast_output.configure(text=values[2])
@@ -58,24 +84,41 @@ def errno(code):
             text = "IP cannot start with 0"
         case 7:
             text = "Multicast IP; not a subnet."
+    paint_normal_window()
     error_status(text)
 
 
 def calculate_subnet():
-    try:
-        ip = ip_input.get()
-        mask = subnet_input.get()
+    ip = ip_input.get()
+    mask = subnet_input.get()
+    check = check_input(ip, mask)
+    if isinstance(check, int):
+        errno(check)
+        return
+    if len(mask) < 4:
         mask = check_mask_format(mask)
-        # Calculate the values info
-        values = subnet_calc(ip, mask)
-        if isinstance(values,int):
-            errno(values)
-        else:
-            clear_output()
-            output(values)
-            status_bar.configure(text="© Mike Rotella 2022", fg="black", bg="#F0F0F0", font="Helvetica 14")
-    except Exception as e:
-        errno(1)
+        if isinstance(mask, int):
+            errno(mask)
+    # Calculate the bitmask if no IP
+        if not ip:
+            mask_check = mask_calc(mask)
+            if mask_check is True:      # Mask is valid
+                values = [mask]
+                for x in range(1,6): values.insert(x,None)
+                clear_output()
+                output(values)
+            else:                       # Mask is invalid
+                return errno(mask_check)
+            paint_normal_status()
+            return
+    # Calculate the values info
+    values = subnet_calc(ip, mask)
+    if isinstance(values,int):
+        errno(values)
+        return
+    clear_output()
+    output(values)
+    paint_normal_status()
 
 
 # Create Window
