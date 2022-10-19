@@ -4,6 +4,22 @@
 from binary import *
 
 
+def mask_calc(mask):
+    """
+    :param mask: Dotted decimal format mask
+    :return: True if no mask error
+    """
+    # Split the mask as a string into a list of strings and do basic error checking
+    mask = DottedDecimalString(mask).convert_mask_to_dotted_decimal_list()
+    if isinstance(mask, int):
+        return mask
+    # Convert the mask list into binary and put it in a list
+    binary_mask = DottedDecimalList(mask)
+    binary_mask = binary_mask.convert_validated_mask_to_binary_list()
+    if isinstance(binary_mask, int):
+        return binary_mask
+    return True
+
 def subnet_calc(ip, mask):
     """
     :param ip: Dotted decimal format IP
