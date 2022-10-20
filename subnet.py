@@ -145,3 +145,20 @@ def check_mask_format(mask):
         mask = mask.replace("/", "")
         mask = BitmaskString(mask).convert_bitmask_to_dotted_decimal()
     return mask
+
+
+def check_input(input1, input2):
+    """
+    :param input1: User input as string
+    :param input2: User input as string
+    :return: Error code, unique case 0 (do nothing), or None (no error)
+    """
+    # If input is invalid length, return error code
+    if len(input1) > 15:
+        return 2
+    elif len(input2) > 15:
+        return 3
+    elif len(input1) == 0 and len(input2) == 0:
+        return 0
+    else:
+        return None
