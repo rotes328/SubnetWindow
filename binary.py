@@ -16,32 +16,35 @@ class DottedDecimalString:
         :return: Valid IP as dotted decimal list
         """
         octets = self.dotted_decimal_string.split(".")
-        # Error if list doesn"t have 4 elements
+        # Error if list doesn't have 4 elements
         if len(octets) != 4:
             return 2
         try:
-            octetList = []
+            octet_list = []
             for octet in octets:
-            # Error if IPv4 invalid or not number
+                # Error if IPv4 invalid or not number
                 if int(octet) not in range(0, 256):
                     return 2
                 else:
-                    octetList.append(octet)
-            if int(octetList[0]) == 0:
-                    return 6
-            elif int(octetList[0]) > 256:
-                    return 2
-            elif int(octetList[0]) > 223:
-                    return 7
+                    octet_list.append(octet)
+            if int(octet_list[0]) == 0:
+                return 6
+            elif int(octet_list[0]) > 256:
+                return 2
+            elif int(octet_list[0]) > 223:
+                return 7
         except ValueError:
             return 2
-        return octetList
+        return octet_list
 
     def convert_mask_to_dotted_decimal_list(self):
         """
         :return: Dotted decimal mask as list (e.g. ["255", "255", "0", "0"]
         """
-        octets = self.dotted_decimal_string.split(".")
+        try:
+            octets = self.dotted_decimal_string.split(".")
+        except AttributeError:
+            return 3
         # Error without 4 elements
         if len(octets) > 4:
             if octets[4] == "":
@@ -57,7 +60,7 @@ class DottedDecimalString:
 class BinaryList:
     def __init__(self, binary_list):
         """
-        :param binary_list: A list of individual 1s and 0s in string format
+        param binary_list: A list of individual 1s and 0s in string format
         """
         self.binary_list = binary_list
         self.length = len(binary_list)
@@ -177,13 +180,14 @@ class DottedDecimalList:
         """
         :return: Dotted decimal as string (e.g. "172.16.200.192")
         """
-        DottedDecimalString = ".".join(self.dotted_decimal_list)
-        return DottedDecimalString
+        dotted_decimal_string = ".".join(self.dotted_decimal_list)
+        return dotted_decimal_string
+
 
 class ByteList:
     def __init__(self, byte_list):
         """
-        :param byte_list: List of byte in binary
+        param byte_list: List of byte in binary
         (e.g. ["0b11000000", "0b10101000", "0b1", "0b0"])
         """
         self.byte_list = byte_list
@@ -257,10 +261,11 @@ class DottedBinaryList:
         dotted_decimal = str(DottedDecimalString(dotted_decimal))
         return dotted_decimal
 
+
 class BitmaskString:
     def __init__(self, bitmask):
         """
-        :param BitmaskString: String representing a mask between 1 and 32
+        :param bitmask: String representing a mask between 1 and 32
         """
         self.bitmask = bitmask
 
@@ -276,7 +281,7 @@ class BitmaskString:
             for i in range(int(self.bitmask)):
                 binary_mask.append("1")
         except ValueError:
-            return(3)
+            return 3
         binary_mask = BinaryList(binary_mask)
         binary_mask = binary_mask.reverse_pad(32)
         dotted_binary = BinaryList(binary_mask).convert_list_to_dotted_binary()
@@ -298,16 +303,16 @@ class BinaryString:
         """
         :return: Binary string without "0b"
         """
-        self.binary_string = str(self.binary_string).replace("0b","")
+        self.binary_string = str(self.binary_string).replace("0b", "")
         return self.binary_string
 
     def convert_to_binary_list(self):
         """
         :return: Binary list
         """
-        list = []
-        list[:0] = self.binary_string
-        return list
+        bin_list = []
+        bin_list[:0] = self.binary_string
+        return bin_list
 
     def pad(self, length):
         """
@@ -323,11 +328,11 @@ class BinaryString:
         """
         :return: List of 4 binary lists (dotted binary), one per byte
         """
-        binary = self.binary_string.replace("0b","")
-        list = []
-        list[:0] = binary
-        list = BinaryList(list).pad(32)
-        dotted_binary = BinaryList(list).convert_list_to_dotted_binary()
+        binary = self.binary_string.replace("0b", "")
+        bin_list = []
+        bin_list[:0] = binary
+        bin_list = BinaryList(bin_list).pad(32)
+        dotted_binary = BinaryList(bin_list).convert_list_to_dotted_binary()
         return dotted_binary
 
 
@@ -336,6 +341,6 @@ def convert_to_list(string):
     :param string: String
     :return: List of each element
     """
-    list=[]
-    list[:0]=string
-    return list
+    str_list = []
+    str_list[:0] = string
+    return str_list
