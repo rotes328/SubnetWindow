@@ -13,7 +13,7 @@ error feedback.
 **Screenshots**
 
 <img src="https://user-images.githubusercontent.com/72516445/197001016-b6de8b56-efda-4e88-ba89-fdb512a8427e.png" alt="Base app" width="400"/><nobr>
-<img src="https://user-images.githubusercontent.com/72516445/197000915-79db1fe0-5d13-4de1-8290-9fd3f4801df2.png" alt="Bitmask calculator" width="400"/><nobr>
+<img src="https://user-images.githubusercontent.com/72516445/197001774-73690022-055f-4933-b4b9-8e0bf878ae23.png" alt="Bitmask calculator" width="400"/><nobr>
 <img src="https://user-images.githubusercontent.com/72516445/197001035-673a25dc-aea4-47cc-870a-fd0258167d02.png" alt="CIDR" width="400"/><nobr>
 <img src="https://user-images.githubusercontent.com/72516445/197001107-b0fbd2d3-f738-4f84-9aac-5df245d93728.png" alt="IP error" width="400"/><nobr>
 
