@@ -34,7 +34,7 @@ def output(values):
 
 
 def error_status(text):
-    status_bar.configure(text=text, bg="red", fg="white", font="Helvetica 14 bold")
+    status_bar.configure(text=text, bg="red", fg="white", font="Helvetica 12 bold")
     network_output.configure(text="----------")
     broadcast_output.configure(text="----------")
     hostrange_output.configure(text="----------")
@@ -68,7 +68,7 @@ def calculate_subnet():
         else:
             clear_output()
             output(values)
-            status_bar.configure(text="© Mike Rotella 2022", fg="black", bg="#F0F0F0", font="Helvetica 14")
+            status_bar.configure(text="© Mike Rotella 2022", fg="black", bg="#F0F0F0", font="Helvetica 12")
     except Exception as e:
         error_message(1)
 
@@ -86,10 +86,10 @@ mask_label = Label(win, text="Mask")
 output1 = Label(win, text="Network Address")
 output2 = Label(win, text="Broadcast Address")
 output3 = Label(win, text="Host Range")
-network_output = Label(win, text="----------", font=("Courier 12 bold"))
-broadcast_output = Label(win, text="----------", font=("Courier 12 bold"))
-hostrange_output = Label(win, text="----------", font=("Courier 12 bold"))
-status_bar = Label(win, text="© Mike Rotella 2022", fg="black", relief=SUNKEN, bg="#F0F0F0", font="Helvetica 14")
+network_output = Label(win, text="----------", font=("Courier 10 bold"))
+broadcast_output = Label(win, text="----------", font=("Courier 10 bold"))
+hostrange_output = Label(win, text="----------", font=("Courier 10 bold"))
+status_bar = Label(win, text="© Mike Rotella 2022", fg="black", relief=SUNKEN, bg="#F0F0F0", font="Helvetica 12")
 
 # Create input fields
 ip_input = Entry(win)
