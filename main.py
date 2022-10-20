@@ -1,6 +1,7 @@
 from tkinter import *
 from subnet import *
 from errors import errno
+from randomvalues import random_values
 
 
 def clear_output():
@@ -107,7 +108,7 @@ def calculator():
 # Create Window
 win = Tk()
 win.title("Subnet Calculator")
-win.geometry("320x180")
+win.geometry("400x180")
 win.grid_rowconfigure(0, weight=1)
 win.grid_columnconfigure(0, weight=1)
 
@@ -138,6 +139,11 @@ subnet_input.grid(row=1, column=1)
 network_output.grid(row=2, column=1)
 broadcast_output.grid(row=3, column=1)
 hostrange_output.grid(row=4, column=1)
+
+# Assign random values to inputs
+random_inputs = random_values()
+ip_input.insert(0, random_inputs[0])
+subnet_input.insert(0, random_inputs[1])
 
 # Bind return to run the app
 win.bind('<Return>', lambda e: calculator())
