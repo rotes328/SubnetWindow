@@ -1,5 +1,5 @@
 def errno(code):
-    text=None
+    text = None
     match code:
         case 1:
             text = "Invalid IPv4 Address or Mask"
