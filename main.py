@@ -17,7 +17,7 @@ def clear_output_params():
 
 
 def paint_normal_status():
-    status_bar.configure(text="© Mike Rotella 2022", fg="black", bg="#F0F0F0", font="Helvetica 14")
+    status_bar.configure(text="© Mike Rotella 2022", fg="black", bg="#F0F0F0", font="Helvetica 10")
 
 
 def paint_normal_window():
@@ -34,7 +34,7 @@ def paint_blank_status():
 
 def error_status(text):
     paint_normal_window()
-    status_bar.configure(text=text, bg="red", fg="white", font="Helvetica 14 bold")
+    status_bar.configure(text=text, bg="red", fg="white", font="Helvetica 10 bold")
     paint_blank_status()
 
 
@@ -119,7 +119,9 @@ def calculator():
 # Create Window
 win = Tk()
 win.title("Subnet Calculator")
-win.geometry("500x178")
+win.geometry("500x176")
+win.minsize(500, 176)
+win.maxsize(500, 176)
 win.grid_rowconfigure(6, weight=1)
 win.grid_columnconfigure(0, weight=1, pad=12)
 win.grid_columnconfigure(1, weight=2, minsize=120)
@@ -131,10 +133,10 @@ mask_label = Label(win, text="Mask")
 output1 = Label(win, text="Network Address")
 output2 = Label(win, text="Broadcast Address")
 output3 = Label(win, text="Host Range")
-network_output = Label(win, text="----------", font="Courier 12 bold")
-broadcast_output = Label(win, text="----------", font="Courier 12 bold")
-hostrange_output = Label(win, text="----------", font="Courier 12 bold")
-status_bar = Label(win, text="© Mike Rotella 2022, Enter to Run, Shift-Enter to Randomize", fg="black", relief=SUNKEN, bg="#F0F0F0", font="Helvetica 14")
+network_output = Label(win, text="----------", font="Courier 10 bold")
+broadcast_output = Label(win, text="----------", font="Courier 10 bold")
+hostrange_output = Label(win, text="----------", font="Courier 10 bold")
+status_bar = Label(win, text="© Mike Rotella 2022, Enter to Run, Shift-Enter to Randomize", fg="black", relief=SUNKEN, bg="#F0F0F0", font="Helvetica 10")
 
 # Create input fields
 ip_input = Entry(win)
