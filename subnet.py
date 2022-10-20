@@ -20,11 +20,12 @@ def mask_calc(mask):
         return binary_mask
     return True
 
+
 def subnet_calc(ip, mask):
     """
-    :param ip: Dotted decimal format IP
-    :param mask: Dotted decimal format mask
-    :return: List with network address, mask length, broadcast address, first host IP,
+    param ip: Dotted decimal format IP
+    param mask: Dotted decimal format mask
+    return: List with network address, mask length, broadcast address, first host IP,
         and last host IP as strings.
     """
     # Split the IP as a string into a list of strings and do basic error checking
@@ -55,15 +56,15 @@ def subnet_calc(ip, mask):
     # Convert the network address to binary and store in a list for later calculation
     binary_subnet = DottedDecimalList(subnet).convert_dotted_decimal_list_to_binary_list()
     # Calculate broadcast info from network and mask binary lists
-    broadcast_list = calculate_broadcast(binary_subnet,binary_mask)
+    broadcast_list = calculate_broadcast(binary_subnet, binary_mask)
     # Format the network address to dotted decimal and store in a string
     subnet_string = DottedDecimalList(subnet).convert_to_dotted_decimal()
     # Store the broadcast address in a string
     broadcast = broadcast_list[1]
     # Calculate first and last host IPs based on the network and broadcast as binary lists
-    range = calculate_host_range(binary_subnet,broadcast_list[0], cidr)
-    first_host_ip = range[0]
-    last_host_ip = range[1]
+    ip_range = calculate_host_range(binary_subnet, broadcast_list[0], cidr)
+    first_host_ip = ip_range[0]
+    last_host_ip = ip_range[1]
     return [subnet_string, cidr, broadcast, first_host_ip, last_host_ip, supernet]
 
 
@@ -137,8 +138,8 @@ def calculate_broadcast(subnet, mask):
 
 def check_mask_format(mask):
     """
-    :param mask: Mask input
-    :return: Mask as dotted decimal if not already in that format
+    param mask: Mask input
+    return: Mask as dotted decimal if not already in that format
     """
     if len(mask) < 4:
         # Accepts / notation and bit-length
@@ -149,9 +150,9 @@ def check_mask_format(mask):
 
 def check_input(input1, input2):
     """
-    :param input1: User input as string
-    :param input2: User input as string
-    :return: Error code, unique case 0 (do nothing), or None (no error)
+    param input1: User input as string
+    param input2: User input as string
+    return: Error code, unique case 0 (do nothing), or None (no error)
     """
     # If input is invalid length, return error code
     if len(input1) > 15:
