@@ -155,7 +155,7 @@ hostrange_output.grid(row=4, column=1, columnspan=2, sticky=W+E)
 # Assign random values to inputs
 make_random_inputs()
 
-# Bind return to run the app
+# Bind return to run the app and shift+return to the Random! button
 win.bind('<Return>', lambda e: calculator())
 win.bind('<Shift-Return>', lambda e: make_random_inputs())
 
