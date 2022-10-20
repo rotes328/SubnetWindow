@@ -119,10 +119,11 @@ def calculator():
 # Create Window
 win = Tk()
 win.title("Subnet Calculator")
-win.geometry("460x178")
+win.geometry("500x178")
 win.grid_rowconfigure(6, weight=1)
-win.grid_columnconfigure(0, weight=1)
-win.grid_columnconfigure(1, weight=2, minsize=240)
+win.grid_columnconfigure(0, weight=1, pad=12)
+win.grid_columnconfigure(1, weight=2, minsize=120)
+win.grid_columnconfigure(2, pad=10)
 
 # Create labels
 ip_label = Label(win, text="IP Address")
@@ -133,7 +134,7 @@ output3 = Label(win, text="Host Range")
 network_output = Label(win, text="----------", font="Courier 12 bold")
 broadcast_output = Label(win, text="----------", font="Courier 12 bold")
 hostrange_output = Label(win, text="----------", font="Courier 12 bold")
-status_bar = Label(win, text="© Mike Rotella 2022", fg="black", relief=SUNKEN, bg="#F0F0F0", font="Helvetica 14")
+status_bar = Label(win, text="© Mike Rotella 2022, Enter to Run, Shift-Enter to Randomize", fg="black", relief=SUNKEN, bg="#F0F0F0", font="Helvetica 14")
 
 # Create input fields
 ip_input = Entry(win)
