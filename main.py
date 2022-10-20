@@ -120,6 +120,8 @@ def calculator():
 win = Tk()
 win.title("Subnet Calculator")
 win.geometry("500x178")
+win.minsize(500, 178)
+win.maxsize(500, 178)
 win.grid_rowconfigure(6, weight=1)
 win.grid_columnconfigure(0, weight=1, pad=12)
 win.grid_columnconfigure(1, weight=2, minsize=120)
