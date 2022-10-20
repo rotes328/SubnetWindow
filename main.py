@@ -38,6 +38,17 @@ def error_status(text):
     paint_blank_status()
 
 
+def clear_inputs():
+    ip_input.delete(0, END)
+    subnet_input.delete(0, END)
+
+def make_random_inputs():
+    clear_inputs()
+    random_inputs = random_values()
+    ip_input.insert(0, random_inputs[0])
+    subnet_input.insert(0, random_inputs[1])
+
+
 def output(values):
     supernet = values[5]
     if supernet is None:
@@ -108,9 +119,10 @@ def calculator():
 # Create Window
 win = Tk()
 win.title("Subnet Calculator")
-win.geometry("400x180")
-win.grid_rowconfigure(0, weight=1)
+win.geometry("460x178")
+win.grid_rowconfigure(6, weight=1)
 win.grid_columnconfigure(0, weight=1)
+win.grid_columnconfigure(1, weight=2, minsize=240)
 
 # Create labels
 ip_label = Label(win, text="IP Address")
@@ -133,26 +145,27 @@ mask_label.grid(row=1)
 output1.grid(row=2)
 output2.grid(row=3)
 output3.grid(row=4)
-status_bar.grid(row=6, column=0, columnspan=2, sticky=W+E)
-ip_input.grid(row=0, column=1)
-subnet_input.grid(row=1, column=1)
-network_output.grid(row=2, column=1)
-broadcast_output.grid(row=3, column=1)
-hostrange_output.grid(row=4, column=1)
+status_bar.grid(row=6, columnspan=3, sticky=W+E)
+ip_input.grid(row=0, column=1, columnspan=2, sticky=W+E)
+subnet_input.grid(row=1, column=1, columnspan=2, sticky=W+E)
+network_output.grid(row=2, column=1, columnspan=2, sticky=W+E)
+broadcast_output.grid(row=3, column=1, columnspan=2, sticky=W+E)
+hostrange_output.grid(row=4, column=1, columnspan=2, sticky=W+E)
 
 # Assign random values to inputs
-random_inputs = random_values()
-ip_input.insert(0, random_inputs[0])
-subnet_input.insert(0, random_inputs[1])
+make_random_inputs()
 
 # Bind return to run the app
 win.bind('<Return>', lambda e: calculator())
+win.bind('<Shift-Return>', lambda e: make_random_inputs())
 
 # Create buttons
-exit_button = Button(win, text="Exit", command=win.quit)
-exit_button.grid(row=5, column=0, sticky=W+E)
+random_button = Button(win, text="Random!", command=make_random_inputs)
+random_button.grid(row=5, sticky=W+E)
 calculate = Button(win, text="Calculate", command=calculator)
-calculate.grid(row=5, column=1, sticky=W+E, pady=4)
+calculate.grid(row=5, column=1, sticky=W+E)
+exit_button = Button(win, text="Exit", command=win.quit)
+exit_button.grid(row=5, column=2, sticky=W+E)
 
 
 if __name__ == "__main__":
